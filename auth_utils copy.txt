@@ -1,0 +1,26 @@
+# auth_utils.py
+from functools import wraps
+from flask import jsonify
+from flask_jwt_extended import verify_jwt_in_request, get_jwt_identity, get_jwt
+
+def admin_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        verify_jwt_in_request()
+
+        # Obtener claims del JWT
+        claims = get_jwt()
+        current_user_id = get_jwt_identity()
+
+        # Aseguramos que el identity es string
+        if not isinstance(current_user_id, str):
+            current_user_id = str(current_user_id)
+
+        rol = claims.get("rol", None)
+
+        if rol != "admin":
+            return jsonify({"error": "Acceso denegado. Solo administradores."}), 403
+
+        return fn(*args, **kwargs)
+
+    return wrapper

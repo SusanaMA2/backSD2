@@ -1,0 +1,11 @@
+usuario
+
+{
+  "nombre": "Admin Principal",
+  "correo": "admin@deporte.com",
+  "contraseña": "123456",
+  "rol": "admin"
+}
+
+
+https://sistemadeportivo-3.onrender.com/api/users/google/callback

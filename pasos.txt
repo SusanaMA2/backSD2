@@ -1,0 +1,17 @@
+
+pip install flask psycopg2-binary flask_sqlalchemy flask_cors flask_jwt_extended python-dotenv
+
+pip install flask flask_sqlalchemy pymysql python-dotenv
+
+pip install flask-jwt-extended
+pip install flask-cors
+
+
+base de datos:
+python create_db.py
+
+
+ejecutar python:
+python app.py
+
+idcliente
