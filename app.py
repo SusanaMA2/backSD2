@@ -19,7 +19,7 @@ def create_app():
     # Sesión
     app.config.update({
         "SESSION_TYPE": "filesystem",
-        "SESSION_COOKIE_SAMESITE": None,
+        "SESSION_COOKIE_SAMESITE": "Lax",
         "SESSION_COOKIE_SECURE": False
     })
     Session(app)
