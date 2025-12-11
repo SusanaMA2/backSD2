@@ -15,21 +15,23 @@ class Config:
     DB_NAME = os.getenv("DB_NAME", "dbSysDep")
 
     SQLALCHEMY_DATABASE_URI = (
-         f"postgresql+psycopg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+        f"postgresql+psycopg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=12)
 
-   
     GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
     GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
-    GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI", "http://localhost:5000/api/users/google/callback")
-    
+    GOOGLE_REDIRECT_URI = os.getenv(
+        "GOOGLE_REDIRECT_URI",
+        "http://localhost:5000/api/users/google/callback"
+    )
+
     CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:5173').split(',')
 
-    SESSION_TYPE = "filesystem"
-    SESSION_COOKIE_NAME = "session"
+    # Configuración de cookies de sesión nativa de Flask
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False      # True en producción HTTPS
     SESSION_COOKIE_SAMESITE = "Lax"
+
