@@ -13,47 +13,51 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # ----------------- SECRET KEY -----------------
-    # Necesario para sesiones y OAuth (state)
+    # Secret key
     app.secret_key = Config.SECRET_KEY
 
-    # ----------------- SESIÓN -----------------
+    # Sesión
     app.config.update({
         "SESSION_TYPE": "filesystem",
-        "SESSION_COOKIE_SAMESITE": None,  # para cross-site
-        "SESSION_COOKIE_SECURE": False     # True solo si HTTPS
+        "SESSION_COOKIE_SAMESITE": None,
+        "SESSION_COOKIE_SECURE": False
     })
-    Session(app)  # ⚠️ debe estar antes de init_oauth
+    Session(app)
 
-    # ----------------- CORS -----------------
+    # CORS
     CORS(app, supports_credentials=True, resources={
         r"/api/*": {
-            "origins": ["http://localhost:5173"],  # frontend
+            "origins": ["http://localhost:5173"],
             "allow_headers": ["Content-Type", "Authorization"],
             "methods": ["GET", "POST", "PUT", "DELETE"],
             "supports_credentials": True
         }
     })
 
-    # ----------------- DB y OAuth -----------------
+    # DB y OAuth
     db.init_app(app)
-    init_oauth(app)  # Google OAuth
+    init_oauth(app)
 
-    # ----------------- Blueprints -----------------
+    # Blueprints
     app.register_blueprint(users_bp)
     app.register_blueprint(events_bp)
     app.register_blueprint(images_bp)
     app.register_blueprint(news_bp)
     app.register_blueprint(videos_bp)
 
-    # ----------------- Ruta base -----------------
+    # Ruta base
     @app.route("/")
     def index():
         return {"message": "API del sistema deportivo activa"}
 
     return app
 
+# --------------------------------
+# Variable global para Gunicorn
+# --------------------------------
+app = create_app()
 
 if __name__ == "__main__":
-    app = create_app()
-    app.run(host="localhost", port=5000, debug=True)
+    # Solo para debug local
+    app.run(host="0.0.0.0", port=5000, debug=True)
+
