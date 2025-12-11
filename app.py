@@ -18,7 +18,7 @@ def create_app():
     # ----------------- CORS -----------------
     CORS(app, supports_credentials=True, resources={
         r"/api/*": {
-            "origins": ["http://localhost:5173"],
+            "origins": ["https://sistemadeportivofront.onrender.com"],
             "allow_headers": ["Content-Type", "Authorization"],
             "methods": ["GET", "POST", "PUT", "DELETE"],
             "supports_credentials": True
