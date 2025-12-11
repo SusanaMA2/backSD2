@@ -19,3 +19,5 @@ cffi==2.0.0
 cryptography==46.0.3
 typing-extensions==4.15.0
 Flask-Session==0.4.0
+psycopg2-binary>=2.9
+
