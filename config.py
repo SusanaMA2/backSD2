@@ -25,10 +25,10 @@ class Config:
     GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
     GOOGLE_REDIRECT_URI = os.getenv(
         "GOOGLE_REDIRECT_URI",
-        "http://localhost:5000/api/users/google/callback"
+        "https://backsd2.onrender.com/api/users/google/callback"
     )
 
-    CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:5173').split(',')
+    CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'https://sistemadeportivofront.onrender.com').split(',')
 
     # Configuración de cookies de sesión nativa de Flask
     SESSION_COOKIE_HTTPONLY = True
