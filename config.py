@@ -28,7 +28,7 @@ class Config:
     
     CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:5173').split(',')
 
-    
-    SESSION_COOKIE_SECURE = False   # False solo en local, True en producción con HTTPS
-    SESSION_COOKIE_SAMESITE = None  # None permite cookies cross-origin
+    SESSION_COOKIE_NAME = "session"  # nombre de la cookie
+    SESSION_COOKIE_SAMESITE = "Lax"  # o None si es cross-site en HTTPS
+    SESSION_COOKIE_SECURE = False 
     SESSION_COOKIE_HTTPONLY = True
