@@ -75,7 +75,7 @@ def google_callback():
     }
 
     # Redirigir al frontend
-    return redirect("http://localhost:5173/login/callback")
+    return redirect("https://sistemadeportivofront.onrender.com/login/callback")
 
     
 
