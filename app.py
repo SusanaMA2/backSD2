@@ -12,27 +12,13 @@ from routes.videos_routes import videos_bp
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-
-    # Secret key
     app.secret_key = Config.SECRET_KEY
 
     # Sesión
-    app.config.update({
-        "SESSION_TYPE": "filesystem",
-        "SESSION_COOKIE_SAMESITE": "Lax",
-        "SESSION_COOKIE_SECURE": False
-    })
     Session(app)
 
     # CORS
-    CORS(app, supports_credentials=True, resources={
-        r"/api/*": {
-            "origins": ["http://localhost:5173"],
-            "allow_headers": ["Content-Type", "Authorization"],
-            "methods": ["GET", "POST", "PUT", "DELETE"],
-            "supports_credentials": True
-        }
-    })
+    CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": Config.CORS_ORIGINS}})
 
     # DB y OAuth
     db.init_app(app)
@@ -52,12 +38,9 @@ def create_app():
 
     return app
 
-# --------------------------------
 # Variable global para Gunicorn
-# --------------------------------
 app = create_app()
 
 if __name__ == "__main__":
-    # Solo para debug local
     app.run(host="0.0.0.0", port=5000, debug=True)
 
